@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Navbar, Nav, NavLink } from 'react-bootstrap'
 
 const Header = () => {
@@ -8,7 +7,8 @@ const Header = () => {
     <Navbar bg="dark" variant="dark" sticky="top">
     <Navbar.Brand href="#home">Парсер</Navbar.Brand>
     <Nav className="ml-auto">
-      <NavLink><Link to='/'>Слово</Link></NavLink>
+      <NavLink  href='/'>Слово</NavLink>
+      <NavLink  href='/find'>Пошук</NavLink>
     </Nav>
   </Navbar>
   </header>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Container, Form, Row, Col, Card, Table } from 'react-bootstrap'
+import { Button, Container, Form, Row, Col, Table } from 'react-bootstrap'
 import Server from '../Services/Server.js'
 
-export default class Main extends Component {
+export default class Find extends Component {
     constructor(props) {
         super(props);
         this.getUserKeyword = this.getUserKeyword.bind(this);
@@ -27,18 +27,12 @@ export default class Main extends Component {
         });
         Server.health().then(res => {
             if (res === 200) {
-                Server.parseKeyword(this.state.keyword).then(res => {
-                    if (res === this.state.keyword) {
-                        Server.getResults(this.state.keyword).then(res => {
-                            console.log(res);
-                            this.setState({
-                                status: true,
-                                results: res
-                            });
-                        });
-                    } else {
-
-                    }
+                Server.getResults(this.state.keyword).then(res => {
+                    console.log(res);
+                    this.setState({
+                        status: true,
+                        results: res
+                    });
                 });
             } else {
 
@@ -48,13 +42,12 @@ export default class Main extends Component {
 
     render() {
         return (
-            <div>
                 <Container>
-                    <Row className="justify-content-md-center my-5">
+                    <Row className="justify-content-md-center my-5" >
                         <Col>
                             <Form className="text-center">
                                 <Form.Group>
-                                    <Form.Label><h2>Парсинг за ключовим словом</h2></Form.Label>
+                                    <Form.Label ><h2>Пошук в базі даних</h2></Form.Label>
                                     <Form.Control size="lg" type="text" placeholder="Введіть ключове слово"
                                         value={this.state.keyword} onChange={this.getUserKeyword} />
                                     <Form.Text className="text-muted">
@@ -67,14 +60,14 @@ export default class Main extends Component {
                     <Row className="justify-content-md-center">
                         <Col></Col>
                         <Col>
-                            <Button variant="primary" disabled={!this.state.status} onClick={this.state.status ? this.sendRequest : null} size="lg" block>
-                                {this.state.status ? 'Почати' : 'Парсимо. Зачекайте...'}
+                            <Button variant="success" disabled={!this.state.status} onClick={this.state.status ? this.sendRequest : null} size="lg" block>
+                                {this.state.status ? 'Знайти' : 'Шукаємо. Зачекайте...'}
                             </Button>
                         </Col>
                         <Col></Col>
                     </Row>
                     <Row>
-                    <Col>
+                        <Col>
                         {
                             this.state.results ?
                             <Table striped bordered hover variant="dark" className="my-3">
@@ -102,7 +95,6 @@ export default class Main extends Component {
                         </Col>
                     </Row>
                 </Container>
-            </div>
         );
     };
 }
