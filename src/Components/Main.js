@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Container, Form, Row, Col, Card, Table } from 'react-bootstrap'
+import { Button, Container, Form, Row, Col, Table } from 'react-bootstrap'
 import Server from '../Services/Server.js'
 
 export default class Main extends Component {
@@ -75,14 +75,14 @@ export default class Main extends Component {
                     </Row>
                     <Row>
                     <Col>
-                        {
+                    {
                             this.state.results ?
-                            <Table striped bordered hover variant="dark" className="my-3">
+                            <Table striped bordered hover variant="dark" className="my-3" size="sm" responsive>
                                 <thead>
                                     <tr>
                                         <th>Позиція</th>
-                                        <th>URL</th>
-                                        <th>Snippet</th>
+                                        <th>Дата</th>
+                                        <th>URL + snippet</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,8 +90,13 @@ export default class Main extends Component {
                                 this.state.results ? this.state.results.map((result) =>
                                     <tr>
                                         <td>{result.position}</td>
-                                        <td>{result.url}</td>
-                                        <td>{result.snippet}</td>
+                                        <td>{result.datetime.substr(0,16)}</td>
+                                            <tr style={{color: 'yellow'}}>
+                                            {result.url}
+                                            </tr>
+                                            <tr style={{color: 'lightgreen'}}>
+                                            {result.snippet}
+                                            </tr>
                                     </tr>
                                      ) : null
                                     }

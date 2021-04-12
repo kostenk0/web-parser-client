@@ -9,6 +9,7 @@ const Header = () => {
     <Nav className="ml-auto">
       <NavLink  href='/'>Слово</NavLink>
       <NavLink  href='/find'>Пошук</NavLink>
+      <NavLink  href='/upload'>Завантажити файл</NavLink>
     </Nav>
   </Navbar>
   </header>
