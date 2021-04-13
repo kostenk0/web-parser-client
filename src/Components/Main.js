@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Container, Form, Row, Col, Table } from 'react-bootstrap'
+import { Button, Container, Form, Row, Col, Table, Alert} from 'react-bootstrap'
 import Server from '../Services/Server.js'
 
 export default class Main extends Component {
@@ -10,8 +10,10 @@ export default class Main extends Component {
 
         this.state = {
             keyword: '',
+            error: false,
             status: true,
-            results: ""
+            results: "",
+            serverError: false
         };
     }
 
@@ -23,7 +25,10 @@ export default class Main extends Component {
     sendRequest(e) {
         e.preventDefault();
         this.setState({
-            status: false
+            status: false,
+            results: "",
+            error: false,
+            serverError: false
         });
         Server.health().then(res => {
             if (res === 200) {
@@ -37,11 +42,17 @@ export default class Main extends Component {
                             });
                         });
                     } else {
-
+                        this.setState({
+                            status: true,
+                            error: true
+                        })
                     }
                 });
             } else {
-
+                this.setState({
+                    status: true,
+                    serverError: true
+                });
             }
         });
     }
@@ -52,6 +63,16 @@ export default class Main extends Component {
                 <Container>
                     <Row className="justify-content-md-center my-5">
                         <Col>
+                        {this.state.error ? 
+                            <Alert variant='warning'>
+                                Помилка парсингу спробуйте ще раз
+                             </Alert> : null
+                            }
+                            {this.state.serverError ? 
+                            <Alert variant='danger'>
+                                Сервер не відповідає
+                             </Alert> : null
+                            }
                             <Form className="text-center">
                                 <Form.Group>
                                     <Form.Label><h2>Парсинг за ключовим словом</h2></Form.Label>

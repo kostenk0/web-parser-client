@@ -28,7 +28,9 @@ class Server {
             .then(body => {
                 const obj = JSON.parse(body);
                 return obj.results;
-            });
+            }).catch((error) => {
+                return "not found";
+            });;
     }
     uploadCSV(list) {
         if (list.length != 0) {
