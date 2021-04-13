@@ -23,6 +23,7 @@ export default class Find extends Component {
         });
     }
     sendRequest(e) {
+        if(this.state.keyword){
         e.preventDefault();
         this.setState({
             status: false,
@@ -52,6 +53,7 @@ export default class Find extends Component {
                 });
             }
         });
+    }
     }
 
     render() {

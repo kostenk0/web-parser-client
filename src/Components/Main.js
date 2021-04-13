@@ -23,6 +23,7 @@ export default class Main extends Component {
         });
     }
     sendRequest(e) {
+        if(this.state.keyword){
         e.preventDefault();
         this.setState({
             status: false,
@@ -55,6 +56,7 @@ export default class Main extends Component {
                 });
             }
         });
+    }
     }
 
     render() {
