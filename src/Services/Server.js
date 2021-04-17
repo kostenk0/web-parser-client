@@ -32,6 +32,18 @@ class Server {
                 return "not found";
             });;
     }
+    getKeywords(url) {
+        return fetch(SERVER_URL + '/getKeywords?value=' + url)
+            .then(res => res.text())
+            .then(body => {
+                console.log(body);
+                const obj = JSON.parse(body);
+                console.log(obj);
+                return obj.results;
+            }).catch((error) => {
+                return "not found";
+            });;
+    }
     uploadCSV(list) {
         if (list.length != 0) {
             let urlArray = 'myParam=' + encodeURI(list[0]);
